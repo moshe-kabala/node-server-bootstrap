@@ -1,10 +1,20 @@
-import { Mongo } from '@storex/db-controller/lib/db-connections/mongo';
-
+import { Mongo } from "@storex/db-controller/lib/db-connections/mongo";
 
 // Connection URL
-const config = require('./config.json');
-const url = "mongodb://" + encodeURIComponent(config.user) + ":" + encodeURIComponent(config.password) +
-    "@localhost:27017/" + ((process.env.NODE_ENV === 'test') ? config.testDb : config.devDb) + "?authSource=admin";
+const config = {
+  user: "",
+  password: "",
+  testDb: "example-db-test",
+  devDb: "example-db"
+};
+const url =
+  "mongodb://" +
+  encodeURIComponent(config.user) +
+  ":" +
+  encodeURIComponent(config.password) +
+  "@localhost:27017/" +
+  (process.env.NODE_ENV === "test" ? config.testDb : config.devDb) +
+  "?authSource=admin";
 
 const mongo = new Mongo(url);
 
@@ -15,10 +25,4 @@ const dropDatabase = mongo.dropDatabase;
 
 const dropCollection = mongo.dropCollection;
 
-export {
-    getDb,
-    getCollection,
-    close,
-    dropDatabase,
-    dropCollection
-};
+export { getDb, getCollection, close, dropDatabase, dropCollection };

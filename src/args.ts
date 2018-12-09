@@ -27,7 +27,13 @@ export namespace Args {
             }
         );
 
-     
+        parser.addArgument(
+            ['--run-server'],
+            {
+                help: 'starts the server',
+                action: 'storeTrue'
+            }
+        );
 
         const localArgs = parser.parseArgs();
         const isAnyArgsDefined = Object.keys(localArgs).some(key => localArgs[key]);

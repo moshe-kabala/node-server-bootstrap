@@ -17,11 +17,6 @@ main(args);
 async function main(_args) {
 
 
-    // bl initialization only if install was NOT specified.
-    if (!_args['install']) {
-        await module1.init();
-    }
-
     Scripts.run(_args);
 
 }

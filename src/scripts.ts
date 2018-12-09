@@ -1,5 +1,6 @@
 import * as bl from "./module1/bl";
 import { isUndefined } from "util";
+import * as ServerInitializer from './config-server';
 
 export namespace Scripts {
   export async function run(args) {
@@ -21,6 +22,13 @@ export namespace Scripts {
         // await bl.someAction()
         console.log("done creating mocks");
       });
+    }
+    if (args["run_server"]) {
+      await doScript(async () => {
+        process.title = "Node Server Bootstrap";
+        bl.init();
+        ServerInitializer.init();
+      }, false);
     }
   }
 
