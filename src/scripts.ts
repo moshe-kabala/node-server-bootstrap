@@ -1,4 +1,4 @@
-import * as bl from "./module/bl";
+import * as bl from "./module1/bl";
 import { isUndefined } from "util";
 
 export namespace Scripts {
@@ -38,7 +38,7 @@ export namespace Scripts {
       }
     }
     if (isExit || exitCode !== 0) {
-      bl.closeProcess(exitCode);
+      process.exit(exitCode);
     }
   }
 }

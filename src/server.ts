@@ -1,4 +1,4 @@
-import { module1ConfigIo, module1Router } from './mosule1/routers';
+import { module1ConfigIo, module1Router } from './module1/routers';
 import { Express, Application } from 'express';
 import * as bodyParser from 'body-parser';
 import { Server as HttpServer } from 'http';

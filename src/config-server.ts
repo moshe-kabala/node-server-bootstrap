@@ -2,10 +2,10 @@ import * as socketIo from 'socket.io';
 import * as express from 'express';
 import * as http from 'http';
 import { Server } from './server';
+import serverDetails from "./config/server"
 const debug = require('debug')('express:server');
 
 
-const port = 2222;
 let server: Server;
 let httpServer;
 let app;
@@ -24,7 +24,7 @@ export async function init() {
     httpServer.on('listening', onListening);
 
      // listen on provided ports
-     return httpServer.listen(port);
+     return httpServer.listen(serverDetails.port);
 }
 
 
@@ -37,9 +37,9 @@ function onError(error) {
         throw error;
     }
 
-    const bind = typeof port === 'string'
-        ? 'Pipe ' + port
-        : 'Port ' + port;
+    const bind = typeof serverDetails.port === 'string'
+        ? 'Pipe ' + serverDetails.port
+        : 'Port ' + serverDetails.port;
 
     // handle specific listen errors with friendly messages
     switch (error.code) {

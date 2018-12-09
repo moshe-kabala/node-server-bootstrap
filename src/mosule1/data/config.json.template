@@ -1,7 +1,0 @@
-{
-    "user": "<USER>",
-    "password": "<PASSWORD>",
-    "testDb": "example-db-test",
-    "devDb": "example-db"
-}
-
