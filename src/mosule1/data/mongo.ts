@@ -1,4 +1,4 @@
-import { Mongo } from '../../../models/mongo';
+import { Mongo } from '@storex/db-controller/lib/db-connections/mongo';
 
 
 // Connection URL

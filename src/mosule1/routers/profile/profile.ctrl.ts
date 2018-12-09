@@ -2,57 +2,40 @@ import { Request, Response, NextFunction } from 'express';
 import * as bl from '../../bl';
 import * as m from '../../models';
 
-export default {
+import { RoutingCtrlWrapper } from "@storex/db-controller/lib/data-ctrl";
+import {profileData} from '../../data';
+import { profileSchema } from '../../models';
 
-    async create(req: Request, res: Response) {
-        const profile = createProfileFromBody(req.body);
-        if (!profile) {
-            return res.status(404).send({ msg: 'body is not define correctly' });
-        }
-        await bl.ProfileBL.createState(profile);
-        res.send({ msg: 'ok' });
-    },
 
-    async getActive(req: Request, res: Response) {
-        const profile = await bl.ProfilesInvokerBL.getCurrentProfile();
-        res.send(profile);
-    },
-
-    async getActives(req: Request, res: Response) {
-        const profiles = await bl.ProfilesInvokerBL.getCurrentProfiles();
-        res.send(profiles);
-    },
-
-    async edit(req: Request, res: Response) {
-        const profile = createProfileFromBody(req.body);
-        if (!profile) {
-            return res.status(404).send({ msg: 'body is not define correctly' });
-        }
-        await bl.ProfileBL.editState(profile);
-        res.send({ msg: 'ok' });
-    },
-
-    async getAll(req: Request, res: Response) {
-        const profiles = await bl.ProfileBL.getAll();
-        res.send(profiles);
-    },
-
-    async remove(req: Request, res: Response) {
-        const id: string = req.params.id;
-        if (!id) {
-            res.status(404).send({ msg: 'Id is required' });
-        }
-        await bl.ProfileBL.remove(id);
-        res.send({msg: 'the profile deleted successfully'});
-    },
-
-    async deleteAll(req: Request, res: Response) {
-        const ids: string[] = req.body.id;
-        if (!ids || !(ids instanceof Array)) {
-            res.status(404).send({ msg: 'body.ids is required' });
-        }
-        await bl.ProfileBL.deleteAll(ids);
+class MapPresetCtrl extends RoutingCtrlWrapper {
+  constructor() {
+    super({
+      data: profileData,
+      modelName: "preset",
+      modelsName: "presets",
+      modelSchema: profileSchema()
+    });
+  }
+  
+  // wrapping add function
+  async add(req, res) {
+    const status = await super.add(req, res);
+    const logAction = {
+      action: "create-layout",
+      request: req,
+      actionDetails: { layout: { name: req.body.name } }
+    };
+    if (status.success) {
+      // do something on success
+      // logger.processEnded(logAction);
+    } else {
+      // do something on failed
+      // logger.processEnded(logAction);
     }
-};
+    return status;
+  }
 
+ 
+}
 
+export const mapPresetCtrl = new MapPresetCtrl();

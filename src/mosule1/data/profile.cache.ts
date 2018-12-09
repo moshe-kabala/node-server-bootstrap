@@ -12,6 +12,6 @@ export const DeviceCache = new CollectionCache({
   name: "Profile",
   getOnInit: true, 
   delay: 1000,
-  getData: () => profileData.getAll(),
+  getData: () => profileData.getMany(),
   id: d => d._id
 });

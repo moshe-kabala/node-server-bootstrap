@@ -2,7 +2,6 @@ const path = require("path");
 const fs = require('fs');
 const nodeExternals = require('webpack-node-externals')
 const externals = nodeExternals();
-const webpack = require("webpack");
 
 
 
@@ -11,7 +10,6 @@ console.log(externals)
 module.exports = {
     entry: {
         main: "./src/main.ts",
-        dynamic_query: "./src/dynamic_query.ts",
     },
 
     target: 'node',

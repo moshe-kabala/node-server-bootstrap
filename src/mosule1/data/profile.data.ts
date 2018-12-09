@@ -1,7 +1,7 @@
 import { getCollection } from "./mongo";
 import { MongoCollectionWrapper } from "@storex/db-controller/lib/data-access";
 
-class MapPresetData extends MongoCollectionWrapper {
+class ProfileData extends MongoCollectionWrapper {
   constructor() {
     super({ getCollection: () => getCollection("profiles") });
   }
@@ -11,4 +11,4 @@ class MapPresetData extends MongoCollectionWrapper {
   }
 }
 
-export const mapPresetData = new MapPresetData();
+export const profileData = new ProfileData();
