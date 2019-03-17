@@ -1,5 +1,5 @@
 import { getCollection } from "./mongo";
-import { MongoCollectionWrapper } from "@storex/db-controller/lib/data-access";
+import { MongoCollectionWrapper } from "@storex/db-controller/lib/wrappers";
 
 class ProfileData extends MongoCollectionWrapper {
   constructor() {

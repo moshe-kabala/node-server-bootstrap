@@ -2,12 +2,12 @@ import { Request, Response, NextFunction } from 'express';
 import * as bl from '../../bl';
 import * as m from '../../models';
 
-import { RoutingCtrlWrapper } from "@storex/db-controller/lib/data-ctrl";
+import { CtrlWrapper } from "@storex/db-controller/lib/wrappers/ctrl-wrapper";
 import {profileData} from '../../data';
 import { profileSchema } from '../../models';
 
 
-class MapPresetCtrl extends RoutingCtrlWrapper {
+class ProfileCtrl extends CtrlWrapper {
   constructor() {
     super({
       data: profileData,
@@ -38,4 +38,4 @@ class MapPresetCtrl extends RoutingCtrlWrapper {
  
 }
 
-export const profileCtrl = new MapPresetCtrl();
+export const profileCtrl = new ProfileCtrl();
