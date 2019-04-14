@@ -1,29 +1,31 @@
-import * as m from '../models';
-import * as d from '../data';
+import { BLWrapper } from "@storex/db-controller/lib/wrappers";
+import * as uid from "uuid";
+import { profileSchema } from "../models";
+import { profileData } from "../data";
+import { stat } from "fs";
 
-
-export namespace ProfileBL {
-    export async function createState(state: m.Profile) {
-        return d.profileData.add(state);
+class ProfileBL extends BLWrapper {
+    
+    constructor() {
+        super({
+            data: profileData,
+            modelName: "presetReport",
+            modelsName: "presetReports",
+            modelSchema: profileSchema(),
+            mapFrom: presetReport => {
+                return presetReport;
+            }
+        });
     }
 
-    export async function editState(state: m.Profile) {
-        return d.profileData.update(state);
-    }
-
-    export async function getMany() {
-        return d.profileData.getMany();
-    }
-
-    export async function getStateById(id: string) {
-        return d.profileData.get({ _id: id });
-    }
-
-    export async function remove(id: string) {
-        await d.profileData.remove(id);
-    }
-
-    export async function deleteAll(ids: string[]) {
-        return d.profileData.removeMany(ids);
+    // Example of overriding a method
+    // It is recommanded to add an ID for the GET method to work well
+    async add(item) {
+        const uidS: string = uid();
+        item._id = uidS;
+        const status = await super.add(item);
+        return status;
     }
 }
+
+export const profileBL = new ProfileBL();

@@ -1,12 +1,13 @@
 import { Mongo } from "@storex/db-controller/lib/db-connections/mongo";
+const config = require('./config.json');
 
-// Connection URL
-const config = {
-  user: "",
-  password: "",
-  testDb: "example-db-test",
-  devDb: "example-db"
-};
+// // Connection URL
+// const config = {
+//   user: "",
+//   password: "",
+//   testDb: "example-db-test",
+//   devDb: "example-db"
+// };
 const url =
   "mongodb://" +
   encodeURIComponent(config.user) +

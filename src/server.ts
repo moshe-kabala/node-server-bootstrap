@@ -90,7 +90,7 @@ export class Server {
    * @return void
    */
   private routes() {
-    this.app.use('/profile', module1Router);
+    this.app.use('/api', module1Router);
     this.app.use((req, res) => {
       res.status(400).send({ msg: 'Unknown path: ' + req.path });
     });

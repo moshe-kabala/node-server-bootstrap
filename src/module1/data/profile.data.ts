@@ -1,13 +1,15 @@
 import { getCollection } from "./mongo";
-import { MongoCollectionWrapper } from "@storex/db-controller/lib/data-access";
+import { MongoCollectionWrapper } from "@storex/db-controller/lib/wrappers";
 
 class ProfileData extends MongoCollectionWrapper {
   constructor() {
     super({ getCollection: () => getCollection("profiles") });
   }
-  // wrap function if you need
+  // Example for wrapping a function
   async getMany(ids?) {
-    return super.getMany(ids, { name: 1 });
+    //return super.getMany(ids, { name: 1 });
+    const result = await super.getMany();
+    return result;
   }
 }
 
