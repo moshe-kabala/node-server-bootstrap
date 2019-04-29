@@ -1,29 +1,68 @@
-import * as m from '../models';
-import * as d from '../data';
+import * as m from "../models";
+import * as d from "../data";
 
+import {
+  BLWrapper,
+  ModelOptionsData
+} from "@storex/db-controller/lib/wrappers";
+import * as uid from "uuid";
+import { profileData } from "../data";
 
-export namespace ProfileBL {
-    export async function createState(state: m.Profile) {
-        return d.profileData.add(state);
-    }
+class ProfileBL extends BLWrapper implements ModelOptionsData {
+  constructor() {
+    super({
+      data: profileData,
+      modelName: "profiles",
+      modelsName: "profile",
+      modelSchema: profileData,
+      mapFrom: d => {
+        // manupulation of returned data (server -> client)
+        return d;
+      },
+      mapTo: d => {
+        // manupulation of returned data (server -> client)
+        return d;
+      }
 
-    export async function editState(state: m.Profile) {
-        return d.profileData.update(state);
-    }
+    });
+  }
 
-    export async function getMany() {
-        return d.profileData.getMany();
-    }
+  async add(item) {
+    this.consoleModule("add: " + item);
+      // in case other module need to know the id of the added to
+    const uidS: string = uid();
+    item._id = uidS;
+    const status = await super.add(item);
+    return status;
+  }
 
-    export async function getStateById(id: string) {
-        return d.profileData.get({ _id: id });
-    }
+  async remove(req) {
+    this.consoleModule("remove: " + req);
+    const status = await super.remove(req);
+    return status;
+  }
 
-    export async function remove(id: string) {
-        await d.profileData.remove(id);
-    }
+  async addMany(items) {
+    this.consoleModule("addMany: " + items);
+    const status = await super.addMany(items);
+    return status;
+  }
 
-    export async function deleteAll(ids: string[]) {
-        return d.profileData.removeMany(ids);
-    }
+  async getManyByFilter(filter) {
+    this.consoleModule("getManyByFilter: " + filter);
+    const status = await super.getManyByFilter(filter);
+    return status;
+  }
+
+  async update(item) {
+    this.consoleModule("update: " + item);
+    const status = await super.update(item);
+    return status;
+  }
+
+  consoleModule(strToShow: string) {
+    console.log("[ ProfileBL ] " + strToShow);
+  }
 }
+
+export const profileBL = new ProfileBL();
