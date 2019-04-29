@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from 'express';
 import { CtrlWrapper } from "@storex/db-controller/lib/wrappers";
 import { profileBL } from '../../bl';
 
-
 class ProfileCtrl extends CtrlWrapper {
   constructor() {
     super({
