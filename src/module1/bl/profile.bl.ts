@@ -1,6 +1,4 @@
-import * as m from "../models";
-import * as d from "../data";
-
+import { profileSchema } from "../models";
 import {
   BLWrapper,
   ModelOptionsData
@@ -14,7 +12,7 @@ class ProfileBL extends BLWrapper implements ModelOptionsData {
       data: profileData,
       modelName: "profiles",
       modelsName: "profile",
-      modelSchema: profileData,
+      modelSchema: profileSchema(),
       mapFrom: d => {
         // manupulation of returned data (server -> client)
         return d;

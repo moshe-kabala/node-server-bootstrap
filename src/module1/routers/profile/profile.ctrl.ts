@@ -1,23 +1,18 @@
 import { Request, Response, NextFunction } from 'express';
-import * as bl from '../../bl';
-import * as m from '../../models';
-
-import { CtrlWrapper } from "@storex/db-controller/lib/wrappers/ctrl-wrapper";
-import {profileData} from '../../data';
-import { profileSchema } from '../../models';
-
+import { CtrlWrapper } from "@storex/db-controller/lib/wrappers";
+import { profileBL } from '../../bl';
 
 class ProfileCtrl extends CtrlWrapper {
   constructor() {
     super({
-      data: profileData,
+      data: profileBL,
       modelName: "preset",
       modelsName: "presets",
-      modelSchema: profileSchema()
+      modelSchema: profileBL.modelSchema
     });
   }
   
-  // wrapping add function
+  // Example for wrapping the add function
   async add(req, res) {
     const status = await super.add(req, res);
     const logAction = {
@@ -34,8 +29,6 @@ class ProfileCtrl extends CtrlWrapper {
     }
     return status;
   }
-
- 
 }
 
 export const profileCtrl = new ProfileCtrl();

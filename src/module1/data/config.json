@@ -1,7 +1,6 @@
 {
     "user": "",
     "password": "",
-    "testDb": "example-db-test",
-    "devDb": "example-db"
+    "testDb": "profiles-test",
+    "devDb": "profiles"
 }
-
