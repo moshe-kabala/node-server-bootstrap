@@ -1,9 +1,6 @@
 const configFilePathDefault = "config/config.yml";
 var nconf = require("nconf");
 
-// export default {
-//   port: 5656 // chose your port
-// };
 
 nconf
   .file({
