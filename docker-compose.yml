@@ -1,0 +1,25 @@
+version: "3.2"
+services:
+  web:
+    image: exampleapp
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    env_file: 
+      - ./.env
+    environment:
+      - PORT=${APP_PORT}
+      
+    ports:
+    - "${APP_PORT}:${APP_PORT}"
+    depends_on:
+    - mongo
+    links:
+    - mongo
+  mongo:
+    image: mongo:3.4
+    ports:
+    - "${MONGO_PORT}:${MONGO_PORT}"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
