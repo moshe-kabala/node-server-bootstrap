@@ -16,11 +16,13 @@ const mongoPort = nconf.get()["MONGO_PORT"] || 27017;
 const mongoUser = nconf.get()["MONGO_USER"] || "myusername";
 const mongoPassword = nconf.get()["MONGO_PASSWORD"] || "mypass";
 const NODE_ENV = nconf.get()["NODE_ENV"] || "localhost";
+const module1_socket_ns = nconf.get()["MODULE1_SOCKET_NS"] || "/module1"
 export const serverConfiguration = {
   port,
   mongoHost,
   mongoPort,
   mongoUser,
   mongoPassword,
-  NODE_ENV
+  NODE_ENV,
+  module1_socket_ns
 };
